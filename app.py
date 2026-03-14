@@ -2,6 +2,7 @@ from __future__ import annotations
 import logging
 import os
 from datetime import datetime
+from flask import send_from_directory
 
 import pymysql
 import pymysql.cursors
@@ -204,6 +205,9 @@ def view_contacts():
     finally:
         conn.close()
 
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
 
 # ── Error Handlers ────────────────────────────────────────────────────────────
 @app.errorhandler(404)
